@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TNH LMS List</title>
+
+<th:block th:replace="fragments/styles :: common"></th:block>
+<th:block th:replace="fragments/styles :: datatable"></th:block>
+
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<th:block th:replace="fragments/sidemenu :: menu"></th:block>
+			<th:block th:replace="fragments/topmenu :: menu"></th:block>
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>History Issue</h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+
+							<table id="datatable" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th style="width: 50px;">#</th>
+										<th>Member</th>
+										<th>Book</th>
+										<th>Book Image</th>
+										<th>Issue Date</th>
+										<th>Return Date</th>
+										<th>Details</th>
+
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="i, state : ${returnList}">
+										<td th:text="${state.count}"></td>
+										<td th:text="${i.member.memberName}"></td>
+
+										<td th:text="${i.book.title}"></td>
+										<td><img th:src="@{'/images/' + ${i.book.image}}"
+											alt="Book Image" style="width: 50px; height: 50px;"></td>
+										<td th:text="${i.issueDate}"></td>
+										<td th:text="${i.returnDate}"></td>
+										<td>
+										<a th:href="@{'/issuebook/details/' + ${i.issueId}}"
+											class="btn btn-primary">Details</a>
+										</td>
+
+
+									</tr>
+								</tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+
+			<th:block th:replace="fragments/footer :: footer"></th:block>
+
+		</div>
+	</div>
+
+	<th:block th:replace="fragments/scripts :: common"></th:block>
+	<th:block th:replace="fragments/scripts :: datatable"></th:block>
+	<script th:src="@{/custom/js/category/list.js}"></script>
+</body>
+</html>

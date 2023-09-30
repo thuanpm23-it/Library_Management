@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TNH LMS List</title>
+
+<th:block th:replace="fragments/styles :: common"></th:block>
+<th:block th:replace="fragments/styles :: datatable"></th:block>
+
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<th:block th:replace="fragments/sidemenu :: menu"></th:block>
+			<th:block th:replace="fragments/topmenu :: menu"></th:block>
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>List of User</h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+
+							<table id="datatable" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Role</th>
+
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="user, state : ${users}">
+										<td th:text="${state.count}"></td>
+										<td th:text="${user.name}"></td>
+										<td th:text="${user.email}"></td>
+										<td th:each="role : ${user.roles}" th:text="${role.name}">
+
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+
+			<th:block th:replace="fragments/footer :: footer"></th:block>
+
+		</div>
+	</div>
+
+	<th:block th:replace="fragments/scripts :: common"></th:block>
+	<th:block th:replace="fragments/scripts :: datatable"></th:block>
+	<script th:src="@{/custom/js/category/list.js}"></script>
+</body>
+</html>

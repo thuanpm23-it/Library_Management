@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TNH LMS Form</title>
+
+<th:block th:replace="fragments/styles :: common"></th:block>
+
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<th:block th:replace="fragments/sidemenu :: menu"></th:block>
+			<th:block th:replace="fragments/topmenu :: menu"></th:block>
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Issue Book</h2>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<form class="form-horizontal form-label-left"
+									th:action="@{/issuebook/save}" th:object="${issueBook}"
+									method="post">
+									<div class="row">
+										<div class="col-sm-4">
+
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 col-xs-12">Member
+												</label>
+												<div class="col-md-8 col-sm-8 col-xs-12">
+													<select th:field="*{member}" class="form-control"
+														id="category-selectbox">
+														<option value="0">Select Member</option>
+														<option th:each="m : ${member}" th:value="${m.memberId}"
+															th:text="${m.memberName}"></option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 col-xs-12">Issue
+													Date</label>
+												<div class="col-md-8 col-sm-8 col-xs-12">
+													<input type="text" th:field="*{issueDate}"
+														class="form-control col-md-7 col-xs-12">
+												</div>
+											</div>
+
+										</div>
+										<div class="col-sm-6" style="padding-left: 0px;">
+
+
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 col-xs-12">Book
+												</label>
+												<div class="col-md-8 col-sm-8 col-xs-12">
+													<select th:field="*{book}" class="form-control"
+														id="category-selectbox">
+														<option value="0">Select Book</option>
+														<option th:each="b : ${book}" th:value="${b.bookId}"
+															th:text="${b.title}"></option>
+													</select>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 col-xs-12">Due
+													Date</label>
+												<div class="col-md-8 col-sm-8 col-xs-12">
+													<input type="text" th:field="*{dueDate}"
+														class="form-control col-md-7 col-xs-12">
+												</div>
+
+											</div>
+
+
+
+										</div>
+										<div class="col-md-2 col-sm-2 col-xs-2">
+											<button type="submit" style="float: right;"
+												class="btn btn-success">Issue Book</button>
+										</div>
+
+									</div>
+								</form>
+
+								<div class="row">
+
+									<div class="col-sm-12 mt-10"
+										style="border: 1px solid #E6E9ED; min-height: 200px;">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th style="width: 50px;">#</th>
+													<th>Member</th>
+													<th>Book</th>
+													<th>Book Image</th>
+
+													<th style="width: 50px;">Details</th>
+													<th style="width: 50px;">Return</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr th:each="i, state : ${issueBooks}">
+													<td th:text="${state.count}"></td>
+													<td th:text="${i.member.memberName}"></td>
+
+													<td th:text="${i.book.title}"></td>
+													<td><img th:src="@{'/images/' + ${i.book.image}}"
+														alt="Book Image" style="width: 50px; height: 50px;"></td>
+
+
+													<td><a
+														th:href="@{'/issuebook/details/' + ${i.issueId}}"
+														class="btn btn-primary">Details</a></td>
+
+													<td><a
+														th:href="@{'/issuebook/return/' + ${i.issueId}}"
+														class="btn btn-danger">Return</a></td>
+													
+												</tr>
+											</tbody>
+
+										</table>
+									</div>
+
+								</div>
+
+
+
+
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- ... -->
+			<!-- Modal -->
+
+
+
+			<!-- ... -->
+
+
+			<th:block th:replace="fragments/footer :: footer"></th:block>
+
+		</div>
+	</div>
+
+	<th:block th:replace="fragments/scripts :: common"></th:block>
+	<script th:src="@{/custom/js/issue/form.js}"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
